@@ -1,0 +1,59 @@
+---
+title: "StudyCase: Netflix RS"
+author: "Diego Lesmes"
+date: "10/11/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## EDA MovieLens Dataset
+
+First is developed the exploratory data analysis to understand the data setup and the  data structure is available from [here](http://files.grouplens.org/datasets/movielens).
+
+So lets go to start:
+
+### Data Available
+```{r dim}
+edx <- edx
+str(edx)
+summary(edx)
+dim(edx)
+```
+
+### Ratings Predictor
+
+Counting the unique values
+
+```{r ratings}
+edx %>% group_by(rating) %>% 
+  summarise(N_Score = n())
+```
+
+```{r ratings hist}
+hist(edx$rating,col = "light yellow",
+     main = "Ratings Predictor",
+     xlab = "Rating")
+```
+### Movies
+
+```{r Movies}
+length(unique(edx$movieId))
+```
+
+### Users
+
+```{r Users}
+length(unique(edx$userId))
+```
+
+### Genre
+
+```{r Genre}
+
+
+```
+
+### 

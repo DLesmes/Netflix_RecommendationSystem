@@ -17,9 +17,9 @@ So lets go to start:
 
 ### Data Available
 ```{r dim}
-edx <- edx
-str(edx)
-summary(edx)
+edx <- get("edx")
+str(edx) %>% knitr::kable()
+summary(edx) %>% knitr::kable()
 dim(edx)
 ```
 
@@ -29,7 +29,8 @@ Counting the unique values
 
 ```{r ratings}
 edx %>% group_by(rating) %>% 
-  summarise(N_Score = n())
+  summarise(N_Score = n()) %>% 
+  knitr::kable()
 ```
 
 ```{r ratings hist}
@@ -37,6 +38,7 @@ hist(edx$rating,col = "light yellow",
      main = "Ratings Predictor",
      xlab = "Rating")
 ```
+
 ### Movies
 
 ```{r Movies}

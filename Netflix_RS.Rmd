@@ -9,6 +9,15 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+
+```{r libraries}
+library(tidyverse)
+library(caret)
+library(data.table)
+library(knitr)
+```
+
+
 ## EDA MovieLens Dataset
 
 First is developed the exploratory data analysis to understand the data setup and the  data structure is available from [here](http://files.grouplens.org/datasets/movielens).
@@ -18,14 +27,14 @@ So lets go to start:
 ### Data Available
 ```{r dim}
 edx <- get("edx")
-str(edx) %>% knitr::kable()
+str(edx)
 summary(edx) %>% knitr::kable()
 dim(edx)
 ```
 
-### Ratings Predictor
+## Variables
+### Ratings
 
-Counting the unique values
 
 ```{r ratings}
 edx %>% group_by(rating) %>% 
@@ -50,12 +59,33 @@ length(unique(edx$movieId))
 ```{r Users}
 length(unique(edx$userId))
 ```
+### Genres
 
-### Genre
+Number of ratings are in each of the following genres
 
-```{r Genre}
+* Drama 
 
+```{r Genres_Drama}
+edx %>% filter(str_detect(genres,"Drama")) %>%
+  nrow()
+```
+* Comedy
 
+```{r Genres_Comedy}
+edx %>% filter(str_detect(genres,"Comedy")) %>%
+  nrow()
 ```
 
-### 
+* Thriller
+
+```{r Genres_Thriller}
+edx %>% filter(str_detect(genres,"Thriller")) %>%
+  nrow()
+```
+
+* Romance
+
+```{r Genres_Romance}
+edx %>% filter(str_detect(genres,"Romance")) %>%
+  nrow()
+```

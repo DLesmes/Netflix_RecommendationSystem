@@ -2,7 +2,7 @@
 title: "StudyCase: Netflix RS"
 author: "Diego Lesmes"
 date: "10/11/2020"
-output: html_document
+output: pdf_document
 ---
 
 ```{r setup, include=FALSE}
@@ -89,3 +89,14 @@ edx %>% filter(str_detect(genres,"Thriller")) %>%
 edx %>% filter(str_detect(genres,"Romance")) %>%
   nrow()
 ```
+### Title
+
+The movie with the greatest number of ratings is
+
+```{r title}
+edx %>% group_by(title) %>% 
+  summarise("N_Ratings" = n()) %>% 
+  arrange(N_Ratings) %>% 
+  tail()
+```
+

@@ -379,6 +379,10 @@ summary {
 </div>
 
 
+<pre class="r"><code>library(tidyverse)
+library(caret)
+library(data.table)
+library(knitr)</code></pre>
 <div id="eda-movielens-dataset" class="section level2">
 <h2>EDA MovieLens Dataset</h2>
 <p>First is developed the exploratory data analysis to understand the data setup and the data structure is available from <a href="http://files.grouplens.org/datasets/movielens">here</a>.</p>
@@ -386,7 +390,7 @@ summary {
 <div id="data-available" class="section level3">
 <h3>Data Available</h3>
 <pre class="r"><code>edx &lt;- get(&quot;edx&quot;)
-str(edx) %&gt;% knitr::kable()</code></pre>
+str(edx)</code></pre>
 <pre><code>## Classes &#39;data.table&#39; and &#39;data.frame&#39;:   9000055 obs. of  6 variables:
 ##  $ userId   : int  1 1 1 1 1 1 1 1 1 1 ...
 ##  $ movieId  : num  122 185 292 316 329 355 356 362 364 370 ...
@@ -395,8 +399,6 @@ str(edx) %&gt;% knitr::kable()</code></pre>
 ##  $ title    : chr  &quot;Boomerang (1992)&quot; &quot;Net, The (1995)&quot; &quot;Outbreak (1995)&quot; &quot;Stargate (1994)&quot; ...
 ##  $ genres   : chr  &quot;Comedy|Romance&quot; &quot;Action|Crime|Thriller&quot; &quot;Action|Drama|Sci-Fi|Thriller&quot; &quot;Action|Adventure|Sci-Fi&quot; ...
 ##  - attr(*, &quot;.internal.selfref&quot;)=&lt;externalptr&gt;</code></pre>
-<pre><code>## Warning in kable_pipe(x = structure(character(0), .Dim = c(0L, 0L), .Dimnames = list(: The table should have a header (column names)</code></pre>
-<p>|| || || ||</p>
 <pre class="r"><code>summary(edx) %&gt;% knitr::kable()</code></pre>
 <table>
 <colgroup>
@@ -479,9 +481,11 @@ str(edx) %&gt;% knitr::kable()</code></pre>
 <pre class="r"><code>dim(edx)</code></pre>
 <pre><code>## [1] 9000055       6</code></pre>
 </div>
-<div id="ratings-predictor" class="section level3">
-<h3>Ratings Predictor</h3>
-<p>Counting the unique values</p>
+</div>
+<div id="variables" class="section level2">
+<h2>Variables</h2>
+<div id="ratings" class="section level3">
+<h3>Ratings</h3>
 <pre class="r"><code>edx %&gt;% group_by(rating) %&gt;% 
   summarise(N_Score = n()) %&gt;% 
   knitr::kable()</code></pre>
@@ -551,11 +555,33 @@ str(edx) %&gt;% knitr::kable()</code></pre>
 <pre class="r"><code>length(unique(edx$userId))</code></pre>
 <pre><code>## [1] 69878</code></pre>
 </div>
-<div id="genre" class="section level3">
-<h3>Genre</h3>
-</div>
-<div id="section" class="section level3">
-<h3></h3>
+<div id="genres" class="section level3">
+<h3>Genres</h3>
+<p>Number of ratings are in each of the following genres</p>
+<ul>
+<li>Drama</li>
+</ul>
+<pre class="r"><code>edx %&gt;% filter(str_detect(genres,&quot;Drama&quot;)) %&gt;%
+  nrow()</code></pre>
+<pre><code>## [1] 3910127</code></pre>
+<ul>
+<li>Comedy</li>
+</ul>
+<pre class="r"><code>edx %&gt;% filter(str_detect(genres,&quot;Comedy&quot;)) %&gt;%
+  nrow()</code></pre>
+<pre><code>## [1] 3540930</code></pre>
+<ul>
+<li>Thriller</li>
+</ul>
+<pre class="r"><code>edx %&gt;% filter(str_detect(genres,&quot;Thriller&quot;)) %&gt;%
+  nrow()</code></pre>
+<pre><code>## [1] 2325899</code></pre>
+<ul>
+<li>Romance</li>
+</ul>
+<pre class="r"><code>edx %&gt;% filter(str_detect(genres,&quot;Romance&quot;)) %&gt;%
+  nrow()</code></pre>
+<pre><code>## [1] 1712100</code></pre>
 </div>
 </div>
 

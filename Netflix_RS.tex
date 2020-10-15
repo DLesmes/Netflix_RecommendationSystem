@@ -1,0 +1,461 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={StudyCase: Netflix RS},
+  pdfauthor={Diego Lesmes},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs}
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+
+\title{StudyCase: Netflix RS}
+\author{Diego Lesmes}
+\date{10/11/2020}
+
+\begin{document}
+\maketitle
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tidyverse)}
+\KeywordTok{library}\NormalTok{(caret)}
+\KeywordTok{library}\NormalTok{(data.table)}
+\KeywordTok{library}\NormalTok{(knitr)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{eda-movielens-dataset}{%
+\subsection{EDA MovieLens Dataset}\label{eda-movielens-dataset}}
+
+First is developed the exploratory data analysis to understand the data
+setup and the data structure is available from
+\href{http://files.grouplens.org/datasets/movielens}{here}.
+
+So lets go to start:
+
+\hypertarget{data-available}{%
+\subsubsection{Data Available}\label{data-available}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{edx <-}\StringTok{ }\KeywordTok{get}\NormalTok{(}\StringTok{"edx"}\NormalTok{)}
+\KeywordTok{str}\NormalTok{(edx)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Classes 'data.table' and 'data.frame':   9000055 obs. of  6 variables:
+##  $ userId   : int  1 1 1 1 1 1 1 1 1 1 ...
+##  $ movieId  : num  122 185 292 316 329 355 356 362 364 370 ...
+##  $ rating   : num  5 5 5 5 5 5 5 5 5 5 ...
+##  $ timestamp: int  838985046 838983525 838983421 838983392 838983392 838984474 838983653 838984885 838983707 838984596 ...
+##  $ title    : chr  "Boomerang (1992)" "Net, The (1995)" "Outbreak (1995)" "Stargate (1994)" ...
+##  $ genres   : chr  "Comedy|Romance" "Action|Crime|Thriller" "Action|Drama|Sci-Fi|Thriller" "Action|Adventure|Sci-Fi" ...
+##  - attr(*, ".internal.selfref")=<externalptr>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(edx) }\OperatorTok{%>%}\StringTok{ }\NormalTok{knitr}\OperatorTok{::}\KeywordTok{kable}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}lllllll@{}}
+\toprule
+\begin{minipage}[b]{0.02\columnwidth}\raggedright
+\strut
+\end{minipage} & \begin{minipage}[b]{0.12\columnwidth}\raggedright
+userId\strut
+\end{minipage} & \begin{minipage}[b]{0.12\columnwidth}\raggedright
+movieId\strut
+\end{minipage} & \begin{minipage}[b]{0.12\columnwidth}\raggedright
+rating\strut
+\end{minipage} & \begin{minipage}[b]{0.15\columnwidth}\raggedright
+timestamp\strut
+\end{minipage} & \begin{minipage}[b]{0.14\columnwidth}\raggedright
+title\strut
+\end{minipage} & \begin{minipage}[b]{0.14\columnwidth}\raggedright
+genres\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.02\columnwidth}\raggedright
+\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
+Min. : 1\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
+Min. : 1\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
+Min. :0.500\strut
+\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright
+Min. :7.897e+08\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\raggedright
+Length:9000055\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\raggedright
+Length:9000055\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.02\columnwidth}\raggedright
+\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
+1st Qu.:18124\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
+1st Qu.: 648\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
+1st Qu.:3.000\strut
+\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright
+1st Qu.:9.468e+08\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\raggedright
+Class :character\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\raggedright
+Class :character\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.02\columnwidth}\raggedright
+\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
+Median :35738\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
+Median : 1834\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
+Median :4.000\strut
+\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright
+Median :1.035e+09\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\raggedright
+Mode :character\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\raggedright
+Mode :character\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.02\columnwidth}\raggedright
+\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
+Mean :35870\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
+Mean : 4122\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
+Mean :3.512\strut
+\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright
+Mean :1.033e+09\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\raggedright
+NA\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\raggedright
+NA\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.02\columnwidth}\raggedright
+\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
+3rd Qu.:53607\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
+3rd Qu.: 3626\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
+3rd Qu.:4.000\strut
+\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright
+3rd Qu.:1.127e+09\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\raggedright
+NA\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\raggedright
+NA\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.02\columnwidth}\raggedright
+\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
+Max. :71567\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
+Max. :65133\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
+Max. :5.000\strut
+\end{minipage} & \begin{minipage}[t]{0.15\columnwidth}\raggedright
+Max. :1.231e+09\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\raggedright
+NA\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\raggedright
+NA\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{dim}\NormalTok{(edx)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 9000055       6
+\end{verbatim}
+
+\hypertarget{variables}{%
+\subsection{Variables}\label{variables}}
+
+\hypertarget{ratings}{%
+\subsubsection{Ratings}\label{ratings}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{edx }\OperatorTok{%>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(rating) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{N_Score =} \KeywordTok{n}\NormalTok{()) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\NormalTok{knitr}\OperatorTok{::}\KeywordTok{kable}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `summarise()` ungrouping output (override with `.groups` argument)
+\end{verbatim}
+
+\begin{longtable}[]{@{}rr@{}}
+\toprule
+rating & N\_Score\tabularnewline
+\midrule
+\endhead
+0.5 & 85374\tabularnewline
+1.0 & 345679\tabularnewline
+1.5 & 106426\tabularnewline
+2.0 & 711422\tabularnewline
+2.5 & 333010\tabularnewline
+3.0 & 2121240\tabularnewline
+3.5 & 791624\tabularnewline
+4.0 & 2588430\tabularnewline
+4.5 & 526736\tabularnewline
+5.0 & 1390114\tabularnewline
+\bottomrule
+\end{longtable}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{hist}\NormalTok{(edx}\OperatorTok{$}\NormalTok{rating,}\DataTypeTok{col =} \StringTok{"light yellow"}\NormalTok{,}
+     \DataTypeTok{main =} \StringTok{"Ratings Predictor"}\NormalTok{,}
+     \DataTypeTok{xlab =} \StringTok{"Rating"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Netflix_RS_files/figure-latex/ratings hist-1.pdf}
+
+\hypertarget{movies}{%
+\subsubsection{Movies}\label{movies}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{length}\NormalTok{(}\KeywordTok{unique}\NormalTok{(edx}\OperatorTok{$}\NormalTok{movieId))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 10677
+\end{verbatim}
+
+\hypertarget{users}{%
+\subsubsection{Users}\label{users}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{length}\NormalTok{(}\KeywordTok{unique}\NormalTok{(edx}\OperatorTok{$}\NormalTok{userId))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 69878
+\end{verbatim}
+
+\hypertarget{genres}{%
+\subsubsection{Genres}\label{genres}}
+
+Number of ratings are in each of the following genres
+
+\begin{itemize}
+\tightlist
+\item
+  Drama
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{edx }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(}\KeywordTok{str_detect}\NormalTok{(genres,}\StringTok{"Drama"}\NormalTok{)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{nrow}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3910127
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  Comedy
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{edx }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(}\KeywordTok{str_detect}\NormalTok{(genres,}\StringTok{"Comedy"}\NormalTok{)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{nrow}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3540930
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  Thriller
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{edx }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(}\KeywordTok{str_detect}\NormalTok{(genres,}\StringTok{"Thriller"}\NormalTok{)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{nrow}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2325899
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  Romance
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{edx }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(}\KeywordTok{str_detect}\NormalTok{(genres,}\StringTok{"Romance"}\NormalTok{)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{nrow}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1712100
+\end{verbatim}
+
+\hypertarget{title}{%
+\subsubsection{Title}\label{title}}
+
+The movie with the greatest number of ratings is
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{edx }\OperatorTok{%>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(title) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\StringTok{"N_Ratings"}\NormalTok{ =}\StringTok{ }\KeywordTok{n}\NormalTok{()) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{arrange}\NormalTok{(N_Ratings) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{tail}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `summarise()` ungrouping output (override with `.groups` argument)
+\end{verbatim}
+
+\begin{verbatim}
+## # A tibble: 6 x 2
+##   title                            N_Ratings
+##   <chr>                                <int>
+## 1 Braveheart (1995)                    26212
+## 2 Shawshank Redemption, The (1994)     28015
+## 3 Jurassic Park (1993)                 29360
+## 4 Silence of the Lambs, The (1991)     30382
+## 5 Forrest Gump (1994)                  31079
+## 6 Pulp Fiction (1994)                  31362
+\end{verbatim}
+
+\end{document}
